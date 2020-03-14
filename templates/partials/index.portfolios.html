@@ -1,0 +1,81 @@
+{% load static %}
+<div class="portfolio-items">
+    {% for portfolio in portfolios %}
+        <!-- portfolio-item -->
+        {% if portfolio.portfolio_type == 'Text' %}
+            <div class="{% for category in portfolio.category.all %}{{ category|lower|cut:" " }} {% endfor %} hentry">
+                <div class="media-box">
+                    <img src="{% if portfolio.featured_image %}{{ portfolio.featured_image.url }}{% else %}{% endif %}"
+                         alt="portfolio-post">
+                    <div class="mask">
+                        <a href="{{ portfolio.get_absolute_url }}" class="ajax"></a>
+                    </div>
+                </div>
+                <h4>{{ portfolio.title }}</h4>
+                <p class="category">{{ portfolio.title_two }}</p>
+            </div>
+            <!-- portfolio-item -->
+        {% elif portfolio.portfolio_type == 'Video' %}
+            <!-- portfolio-item - lightbox video -->
+            <div class="{% for category in portfolio.category.all %}{{ category|lower|cut:" " }} {% endfor %} video hentry">
+                <div class="media-box">
+                    <img src="{% if portfolio.featured_image %}{{ portfolio.featured_image.url }}{% else %}{% endif %}" alt="portfolio-post">
+                    <div class="mask">
+                        <!-- lightbox - video -->
+                        <a href="http://player.vimeo.com/video/37254322?badge=0&amp;color=ffffff"
+                           title="{{ portfolio.title }}"
+                           data-lightbox-gallery="fancybox-item-03"
+                           class="lightbox iframe"></a>
+                        <!-- lightbox - video -->
+                    </div>
+                </div>
+                <h4>{{ portfolio.title }}</h4>
+                <p class="category">{{ portfolio.title_two }}</p>
+            </div>
+            <!-- portfolio-item - lightbox video -->
+        {% elif portfolio.portfolio_type == 'Image' %}
+            <!-- portfolio-item - lightbox image -->
+            <div class="{% for category in portfolio.category.all %}{{ category|lower|cut:" " }} {% endfor %} image hentry">
+                <div class="media-box">
+                    <img src="{% if portfolio.featured_image %}{{ portfolio.featured_image.url }}{% else %}{% endif %}" alt="portfolio-post">
+                    <div class="mask">
+
+                        <!-- lightbox - image -->
+                        <a href="{% if portfolio.featured_image %}{{ portfolio.featured_image.url }}{% else %}{% endif %}"
+                           title="{{ portfolio.title }}"
+                           data-lightbox-gallery="fancybox-item-01"
+                           class="lightbox"></a>
+                        <!-- lightbox - image -->
+                    </div>
+                </div>
+                <h4>{{ portfolio.title }}</h4>
+                <p class="category">{{ portfolio.title_two }}</p>
+            </div>
+            <!-- portfolio-item - lightbox image -->
+        {% else %}
+            <!-- portfolio-item - lightbox gallery -->
+            <div class="{% for category in portfolio.category.all %}{{ category|lower|cut:" " }} {% endfor %} image hentry">
+                <div class="media-box">
+                    <img src="{% if portfolio.featured_image %}{{ portfolio.featured_image.url }}{% else %}{% endif %}" alt="portfolio-post">
+                    <div class="mask">
+                        <!-- lightbox - gallery -->
+                        <a href="{% static 'img/portfolio/lightbox-02.jpg' %}"
+                           data-lightbox-gallery="fancybox-item-02" class="lightbox"
+                           title="{{ portfolio.title }}"></a>
+                        <a href="{% static 'img/portfolio/lightbox-04.jpg' %}"
+                           data-lightbox-gallery="fancybox-item-02"
+                           class="hidden lightbox"></a>
+                        <a href="{% static 'img/portfolio/lightbox-03.jpg' %}"
+                           data-lightbox-gallery="fancybox-item-02"
+                           class="hidden lightbox"
+                           title="{{ portfolio.title }}"></a>
+                        <!-- lightbox - gallery -->
+                    </div>
+                </div>
+                <h4>{{ portfolio.title }}</h4>
+                <p class="category">{{ portfolio.title_two }}</p>
+            </div>
+            <!-- portfolio-item - lightbox gallery -->
+        {% endif %}
+    {% endfor %}
+</div>

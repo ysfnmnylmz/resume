@@ -1,0 +1,53 @@
+{% load static %}
+<ul class="social">
+    {% for social in contact.social_media.all %}
+        <li><a class="{{ social.title|lower }}" href="{{ social.link }}"></a></li>
+    {% endfor %}
+</ul>
+<!-- SOCIAL -->
+<h3><span>DROP ME A LINE!</span></h3>
+<!-- .contact-form -->
+<div class="contact-form">
+    <!-- LETTER -->
+    <div class="letter cf">
+        <div class="stamp">
+            <img src="{{ contact.picture.url }}" alt="stamp">
+        </div>
+        <div class="letter-info">
+            <h4>{{ contact.name|lower }}</h4>
+            {% for mail in contact.mails.all %}
+            <p>
+                <a href="mailto://{{ mail.title }}"><i>{{ mail.title }}</i></a>
+            </p>
+            {% endfor %}
+            <p>{{ contact.location }}</p>
+        </div>
+    </div>
+    <!-- LETTER -->
+    <form id="contact-form" action="send-mail.php" method="post">
+        <!-- enter your e-mail address here -->
+        <input type="hidden" id="to" name="to" value="ysfnmnylmz@gmail.com">
+        <p>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" class="required">
+        </p>
+        <p>
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" class="required email">
+        </p>
+        <p>
+            <label for="subject">Subject</label>
+            <input type="text" name="subject" id="subject" class="required">
+        </p>
+        <p>
+            <label for="message">Message</label>
+            <textarea name="message" id="message" class="required"></textarea>
+        </p>
+        <p>
+            <img class="ajax-loader" src="{% static 'img/bckg/loader_light.gif' %}"
+                 alt="Sending ...">
+            <input type="submit" class="btn submit" value="SEND">
+        </p>
+    </form>
+</div>
+<!-- .contact-form -->

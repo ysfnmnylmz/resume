@@ -1,0 +1,44 @@
+{% load static %}
+<h3><span>EMPLOYMENT</span></h3>
+<div class="history-group">
+    {% for employment in employments %}
+        <div class="history-unit">
+            <h4 class="work-time">{% if employment.finish_date %}{{ employment.start_date |date:"Y" }} -
+                {{ employment.finish_date|date:"Y" }}{% else %} since
+                {{ employment.start_date |date:"Y" }}{% endif %}</h4>
+            <div class="work-desc">
+                <h4>{{ employment.job_title }}</h4>
+                <h5>{{ employment.co_name }}</h5>
+                <p>{{ employment.job_description }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<h3><span>EDUCATION</span></h3>
+<div class="history-group">
+    {% for education in educations %}
+        <div class="history-unit">
+            <h4 class="work-time">{% if education.finish_date %}{{ education.start_date |date:"Y" }} -
+                {{ education.finish_date|date:"Y" }}{% else %} since
+                {{ education.start_date |date:"Y" }}{% endif %}</h4>
+            <div class="work-desc">
+                <h4>{{ education.institute_stage }}</h4>
+                <h5>{{ education.institute_name }}</h5>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<div class="launch">
+    <a href="#" class="btn">DOWNLOAD CV</a>
+</div>
+<h3><span>DEVELOPMENT SKILLS</span></h3>
+<div class="skill-group">
+    {% for skill in skills %}
+        <div class="skill-unit">
+            <h4>{{ skill.name }}</h4>
+            <div class="bar" data-percent="{{ skill.progress }}">
+                <div class="progress"></div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
