@@ -286,7 +286,7 @@
 			path = giveDetailUrl() != -1 ? portfolioKeyword : path;
 			if(path == "") {  // if hash tag doesnt exists - go to first page
 				var firstPage = $('#header ul li').first().find('a').attr('href');
-				path = firstPage.slice(2,firstPage.length);
+				path = firstPage.slice(1,firstPage.length);
 				$.address.path(path);
 				}
 			
@@ -297,7 +297,8 @@
 				$('.page.active').hide();
 			}	
 			
-			$(path).addClass('active');
+			$('#'+path).addClass('active');
+			$('#'+path).css('display', 'block');
 			
 			// detect if user is on cover page
 			if($('.page.active').find('.cover').length) {
@@ -307,7 +308,6 @@
 			}
 			
 			setCurrentMenuItem();
-			console.log('path', path)
 			
 			if(path.indexOf(portfolioKeyword) != -1) {
 				setTimeout(function() { setMasonry(); }, 100);

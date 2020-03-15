@@ -573,7 +573,7 @@ a.ribbon:hover { color: #000; }
 }
 
 /* HIGH RES DESKTOPS */
-@media screen and (min-width: 1200px) { 
+@media screen and (min-width: 1200px) {
 	.portfolio-items .hentry img { -webkit-filter: grayscale(50%); }
 	.portfolio-items .media-box:hover img { -webkit-filter: grayscale(0%); }
 }
