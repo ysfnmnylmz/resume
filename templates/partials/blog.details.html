@@ -1,0 +1,373 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block App %}
+<body class="classic">
+<!-- PAGE -->
+<div id="page" class="hfeed site">
+    <!-- .site-main -->
+    <main id="main" class="site-main">
+        <!-- HEADER -->
+        <header id="masthead" class="header cover" role="banner">
+            <div class="cover-image-holder">
+                <img src="images/site/cover.jpg" alt="cover-image">
+            </div>
+            <!-- header-wrap -->
+            <div class="header-wrap layout-full">
+                <!-- image-logo -->
+                <!--<a class="header-title-link" href="index.html"><img src="../images/site/avatar.jpg" alt="avatar"></a>-->
+                <h1 class="site-title">Alex Zeis</h1>
+                <h2>Freelance UI/UX Designer &amp; writer</h2>
+                <!-- header-social -->
+                <div class="header-bottom">
+                    <!-- SOCIAL -->
+                    <p>
+                        <a class="social-link facebook" href="#"></a>
+                        <a class="social-link twitter" href="#"></a>
+                        <a class="social-link linkedin" href="#"></a>
+                        <a class="social-link instagram" href="#"></a>
+                    </p>
+                    <!-- SOCIAL -->
+                </div>
+                <!-- header-social -->
+                <!-- NAV MENU -->
+                <nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+                    <div class="nav-menu ">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="#">Custom Link</a></li>
+                            <li><a href="#">This is</a></li>
+                            <li><a href="#">Classic</a></li>
+                            <li><a href="#">Menu</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- NAV MENU -->
+            </div>
+            <!-- header-wrap -->
+        </header>
+        <!-- HEADER -->
+        <!-- site-middle -->
+        <div class="site-middle">
+            <div class="layout-medium">
+                <div id="primary" class="content-area with-sidebar">
+                    <!-- site-content -->
+                    <div id="content" class="site-content" role="main">
+                        <!-- .blog-single -->
+                        <div class="blog-single page-layout">
+                            <!-- .hentry -->
+                            <article class="post type-post hentry">
+                                <!-- .entry-header -->
+                                <header class="entry-header">
+                                    <h2 class="entry-title">{{ latest.title }}</h2>
+                                    <!-- .entry-meta -->
+                                    <div class="entry-meta">
+                                                <span class="entry-date">
+                                                    <time class="entry-date"
+                                                          datetime="{{ latest.created_at|date:'c' }}">{{ latest.created_at|date:'F d Y' }}</time>
+                                                </span>
+                                        {% for i in  latest.category.all %}
+                                        <span class="cat-links">
+                                                    <a href="#" title="View all posts in {{ i.title }}"
+                                                       rel="category tag">{{ i.title }}</a>
+                                                </span>
+                                        {% endfor %}
+                                    </div>
+                                    <!-- .entry-meta -->
+                                </header>
+                                <!-- .entry-header -->
+                                <!-- .featured-image -->
+                                <div class="featured-image">
+                                    <img src="{{ latest.featured_image }}" alt="blog-image">
+                                </div>
+                                <!-- .featured-image -->
+                                <!-- .entry-content -->
+                                <div class="entry-content">
+                                    <p>{{ latest.blog_description }}</p>
+                                    <!-- .entry-meta -->
+                                    <footer class="entry-meta tags">
+                                        {% for meta in latest.blog_keywords.all %}
+                                            <a href="#" rel="tag">{{ meta.title }}</a>
+                                        {% endfor %}
+                                    </footer>
+                                    <!-- .entry-meta -->
+                                </div>
+                                <!-- .entry-content -->
+                                <!-- .related-posts -->
+                                <div class="related-posts">
+                                    <!-- section-title -->
+                                    <div class="section-title center">
+                                        <h2>
+                                            Related Posts
+                                        </h2>
+                                    </div>
+                                    <!-- section-title -->
+                                    <!-- LATEST POSTS -->
+                                    <div class="latest-posts media-grid">
+                                        <!-- post -->
+                                        <article class="media-cell">
+
+                                            <div class="media-box">
+                                                <a href="blog-single.html"><img src="images/blog/02.jpg"
+                                                                                alt="post-image"></a>
+                                            </div>
+
+                                            <header class="media-cell-desc">
+                                                <h2>
+                                                    <a href="blog-single.html">Inspirational Magazine Designs That You
+                                                        Should See</a>
+                                                </h2>
+                                            </header>
+
+                                        </article>
+                                        <!-- post -->
+                                    </div>
+                                    <!-- LATEST POSTS -->
+                                </div>
+                                <!-- .related-posts -->
+                            </article>
+                            <!-- .hentry -->
+                            <!-- .nav-single -->
+                            <nav class="nav-single row">
+                                <div class="nav-previous col-sm-6">
+                                    <h6>PREVIOUS POST</h6>
+                                    <h2><a href="{{ prev.get_absolute_url }}" rel="prev"><span
+                                            class="meta-nav">←</span> {{ prev.title }}</a></h2>
+                                </div>
+                                <div class="nav-next col-sm-6">
+                                    <h6>NEXT POST</h6>
+                                    <h2><a href="{{ next.get_absolute_url }}" rel="next">{{ next.title }}<span
+                                            class="meta-nav">→</span></a></h2>
+                                </div>
+                            </nav>
+                            <!-- .nav-single -->
+                        </div>
+                        <!-- .blog-single -->
+                    </div>
+                    <!-- site-content -->
+                </div>
+                <!-- primary -->
+                <!-- #secondary -->
+                <div id="secondary" class="widget-area sidebar" role="complementary">
+                    <!-- widget : categories -->
+                    <aside class="widget widget_categories">
+                        <h3 class="widget-title">Categories</h3>
+                        <ul>
+                            {% for category in blog_categories %}
+                                <li class="cat-item"><a href="#" title="View all posts filed under Freebies">{{ category.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </aside>
+                    <!-- widget : categories -->
+                    <!-- widget : popular-posts -->
+                    <!-- styles for plugin : https://wordpress.org/plugins/top-10 -->
+                    <aside class="widget widget_widget_tptn_pop">
+                        <h3 class="widget-title">Trending Posts</h3>
+                        <div class="tptn_posts tptn_posts_widget">
+                            <ul>
+                                <li>
+                                    <a href="#" class="tptn_link">
+                                        <img src="images/blog/p4.jpg" alt="post-image" class="tptn_thumb">
+                                    </a>
+                                    <span class="tptn_after_thumb">
+                                                <a href="#" class="tptn_link"><span class="tptn_title">Dive Into The Sea Life</span></a>
+                                        <!--<span class="tptn_author"> by <a href="#">Johnny Doe</a></span>-->
+                                                <span class="tptn_date"> September 3, 2014</span> 
+                                            </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                    <!-- widget : popular-posts -->
+
+
+                    <!-- widget : text -->
+                    <!--<aside class="widget widget_text">-->
+                    <!--<h3 class="widget-title">Advertisement</h3>-->
+                    <!--<div class="textwidget">
+                        <a href="#"><img src="images/blog/banner.jpg" alt="banner"></a>
+                    </div>
+                </aside>-->
+                    <!-- widget : text -->
+                    <!-- widget : recent-posts -->
+                    <aside class="widget widget_recent_entries">
+                        <h3 class="widget-title">Recent Posts</h3>
+                        <ul>
+                            <li><a href="#">Summer Vibes Flowing</a></li>
+                            <li><a href="#">Autmn 2015 Lookbook</a></li>
+                            <li><a href="#">Good Vibes</a></li>
+                            <li><a href="#">Self Employed Lifestyle</a></li>
+                        </ul>
+                    </aside>
+                    <!-- widget : recent-posts -->
+                    <!-- widget : text -->
+                    <!--<aside class="widget widget_text">
+                      <h3 class="widget-title">Twitter</h3>
+                      <a class="twitter-timeline" href="https://twitter.com/ahmetsali" data-widget-id="535243602809856001">Tweets by @ahmetsali</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    </aside>-->
+                    <!-- widget : text -->
+                    <!-- widget : text -->
+                    <aside class="widget widget_text">
+                        <h3 class="widget-title">Facebook</h3>
+                        <!-- below code generated by : https://developers.facebook.com/docs/plugins/page-plugin -->
+                        <div id="fb-root"></div>
+                        <script>(function (d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) return;
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "http://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));</script>
+                        <div class="fb-page" data-href="https://www.facebook.com/vsco" data-small-header="false"
+                             data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"
+                             data-show-posts="false">
+                            <div class="fb-xfbml-parse-ignore">
+                                <blockquote cite="https://www.facebook.com/vsco"><a
+                                        href="https://www.facebook.com/vsco">VSCO</a></blockquote>
+                            </div>
+                        </div>
+
+                    </aside>
+                    <!-- widget : text -->
+                    <!-- widget : search -->
+                    <!--<aside class="widget widget_search">
+                        <h3 class="widget-title">Search</h3>
+                        <form role="search" method="get" class="search-form" action="#">
+                            <label>
+                                <span class="screen-reader-text">Search for:</span>
+                                <input type="search" class="search-field" title="Enter Keyword">
+                            </label>
+                            <input type="submit" class="search-submit" value="Search">
+                        </form>
+                    </aside>-->
+                    <!-- widget : search -->
+                    <!-- widget : recent_comments -->
+                    <!--<aside class="widget widget_recent_comments">
+                        <h3 class="widget-title">Recent Comments</h3>
+                        <ul id="recentcomments">
+                            <li class="recentcomments"><a href="#" rel="external nofollow" class="url">Albert Einstein</a> on <a href="#">Adaptive Layouts</a></li>
+                            <li class="recentcomments"><a href="#" rel="external nofollow" class="url">Thomas Edison</a> on <a href="#">I invented the bulb!</a></li>
+                            <li class="recentcomments"><a href="#" rel="external nofollow" class="url">Isaac Newton</a> on <a href="#">Gravity Theory</a></li>
+                        </ul>
+                    </aside>-->
+                    <!-- widget : recent_comments -->
+                    <!-- widget : archive -->
+                    <!--<aside class="widget widget_archive">
+                        <h3 class="widget-title">Archives</h3>
+                        <ul>
+                            <li><a href="#" title="July 2012">July 2014</a></li>
+                            <li><a href="#" title="June 2012">June 2014</a></li>
+                            <li><a href="#" title="May 2012">May 2014</a></li>
+                            <li><a href="#" title="April 2012">April 2014</a></li>
+                        </ul>
+                    </aside>-->
+                    <!-- widget : archive -->
+                    <!-- widget : calendar -->
+                    <!--<aside class="widget widget_calendar">
+                        <h3 class="widget-title">Calendar</h3>
+                        <div id="calendar_wrap">
+                            <table id="wp-calendar">
+                                <caption>
+                                July 2014
+                                </caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" title="Monday">M</th>
+                                        <th scope="col" title="Tuesday">T</th>
+                                        <th scope="col" title="Wednesday">W</th>
+                                        <th scope="col" title="Thursday">T</th>
+                                        <th scope="col" title="Friday">F</th>
+                                        <th scope="col" title="Saturday">S</th>
+
+                                        <th scope="col" title="Sunday">S</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3" id="prev"><a href="#" title="View posts for June 2015">« Jun</a></td>
+                                        <td class="pad">&nbsp;</td>
+                                        <td colspan="3" id="next" class="pad">&nbsp;</td>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="1" class="pad">&nbsp;</td>
+                                        <td>1</td>
+                                        <td><a href="#" title="test">2</a></td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                        <td>5</td>
+                                        <td>6</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>8</td>
+                                        <td>9</td>
+                                        <td>10</td>
+                                        <td>11</td>
+                                        <td>12</td>
+                                        <td>13</td>
+                                    </tr>
+                                    <tr>
+                                        <td>14</td>
+                                        <td id="today">15</td>
+                                        <td>16</td>
+                                        <td>17</td>
+                                        <td>18</td>
+                                        <td>19</td>
+                                        <td>20</td>
+                                    </tr>
+                                    <tr>
+                                        <td>21</td>
+                                        <td>22</td>
+                                        <td>23</td>
+                                        <td>24</td>
+                                        <td>25</td>
+                                        <td>26</td>
+                                        <td>27</td>
+                                    </tr>
+                                    <tr>
+                                        <td>28</td>
+                                        <td>29</td>
+                                        <td>30</td>
+                                        <td>31</td>
+                                        <td class="pad" colspan="3">&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </aside>-->
+                    <!-- widget : calendar -->
+                    <!-- widget : pages -->
+                    <!--<aside class="widget widget_pages">
+                        <h3 class="widget-title">Pages</h3>
+                        <ul>
+                            <li class="page_item page_item_has_children"><a href="#">About Me</a>
+                                <ul class="children">
+                                    <li class="page_item"><a href="#">Clearing Floats</a></li>
+                                    <li class="page_item"><a href="#">Page Image Alignment</a></li>
+                                    <li class="page_item"><a href="#">Page Markup And Formatting</a></li>
+                                    <li class="page_item"><a href="#">Page with comments</a></li>
+                                    <li class="page_item"><a href="#">Page with comments disabled</a></li>
+                                </ul>
+                            </li>
+                            <li class="page_item"><a href="#">About Me</a></li>
+                            <li class="page_item current_page_item"><a href="#">Gallery</a></li>
+                            <li class="page_item"><a href="#">Contact</a></li>
+                        </ul>
+                    </aside>-->
+                    <!-- widget : pages -->
+                </div>
+                <!-- #secondary -->
+            </div>
+            <!-- layout -->
+        </div>
+        <!-- site-middle -->
+    </main>
+    <!-- .site-main -->
+</div>
+<!-- PAGE -->
+</body>
+{% endblock %}
