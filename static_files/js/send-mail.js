@@ -14,7 +14,7 @@
 				
 				$.post($(this).attr('action'), formValues, function(data)
 				{
-					if ( data == 'success' )
+					if ( data[0].status === 'success' )
 					{
 						contactForm.clearForm();
 					}

@@ -19,7 +19,7 @@ class BlogPosts(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Published Date', blank=True, null=True)
     category = models.ManyToManyField(BlogPostCategories)
     title = models.CharField(max_length=255, verbose_name='Blog Post Title', blank=True, null=True)
-    featured_image = models.ImageField(verbose_name='Featured Image', blank=True, null=True)
+    featured_image = models.ImageField(verbose_name='Featured Image', upload_to='uploads/', blank=True, null=True)
     blog_keywords = models.CharField(max_length=255, verbose_name='Blog Post Meta Keywords')
     blog_description = RichTextField()
     summary = models.CharField(max_length=200, verbose_name="Blog Post Summary", blank=True, null=True, editable=False)

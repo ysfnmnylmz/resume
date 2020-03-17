@@ -17,6 +17,12 @@ class MailsAdmin(admin.ModelAdmin):
         model = Mails
 
 
+class FormAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Form
+
+
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(Social, SocialAdmin)
 admin.site.register(Mails, MailsAdmin)
+admin.site.register(Form, FormAdmin)

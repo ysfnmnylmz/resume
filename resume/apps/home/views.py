@@ -3,6 +3,7 @@ from resume.apps.portfolio.models import Portfolio, PortfolioCategories
 from resume.apps.resume_app.models import Skills, Educations, Employments
 from resume.apps.contact.models import Social, Mails, Contact
 from resume.apps.blog.models import BlogPosts
+from resume.apps.settings.models import Settings
 
 
 def home(request):
@@ -13,8 +14,10 @@ def home(request):
     contact = Contact.objects.first()
     portfolio_categories = PortfolioCategories.objects.all()
     latest = BlogPosts.objects.first()
+    settings = Settings.objects.first()
 
     payload = {
+        'settings': settings,
         'latest': latest,
         'portfolios': portfolios,
         'portfolio_categories': portfolio_categories,

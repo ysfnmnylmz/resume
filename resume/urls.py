@@ -24,6 +24,7 @@ urlpatterns = [
     url('', include('resume.apps.home.urls', namespace='home')),
     url('portfolio/', include('resume.apps.portfolio.urls', namespace='portfolio')),
     url('blog/', include('resume.apps.blog.urls', namespace='blog')),
+    url('contact/', include('resume.apps.contact.urls', namespace='contact'))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

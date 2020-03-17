@@ -127,6 +127,16 @@ CKEDITOR_CONFIGS = {
         ],
     },
 }
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
+SENT_EMAIL = True
+EMAIL_TO = 'ysfnmnylmz@gmail.com'
+EMAIL_HOST_USER = 'ysfnmnylmz@gmail.com'
+EMAIL_HOST_PASSWORD = 'venetian12'
+
 
 
 FILE_UPLOAD_PERMISSIONS = 0o644

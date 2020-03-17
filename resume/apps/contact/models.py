@@ -27,15 +27,30 @@ class Social(models.Model):
 
 class Contact(models.Model):
     name = models.CharField(max_length=255, verbose_name='Name', default='Your Name')
+    description = models.CharField(max_length=255, verbose_name='Description', blank=True, null=True)
     picture = models.FileField(verbose_name='Photo')
     mails = models.ManyToManyField(Mails)
     phone = models.IntegerField(verbose_name='Phone')
     social_media = models.ManyToManyField(Social)
-    location = models.CharField(max_length=120, verbose_name='Location',blank=True, null=True)
+    location = models.CharField(max_length=120, verbose_name='Location', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Contact Information'
         verbose_name_plural = 'Contact Informations'
+
+    def __str__(self):
+        return self.name
+
+
+class Form(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Name')
+    email = models.EmailField(verbose_name='Email')
+    subject = models.CharField(max_length=255, verbose_name='Subject')
+    message = models.TextField(verbose_name='Message')
+
+    class Meta:
+        verbose_name = 'Contact Form'
+        verbose_name_plural = 'Contact Forms'
 
     def __str__(self):
         return self.name
