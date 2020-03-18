@@ -23,6 +23,7 @@ class BlogPosts(models.Model):
     blog_keywords = models.CharField(max_length=255, verbose_name='Blog Post Meta Keywords')
     blog_description = RichTextField()
     summary = models.CharField(max_length=200, verbose_name="Blog Post Summary", blank=True, null=True, editable=False)
+    view = models.PositiveIntegerField(editable=False, default=0)
 
     class Meta:
         verbose_name_plural = "Blog Posts"

@@ -57,7 +57,7 @@
                                     <!-- latest-from-blog -->
                                     <div class="latest-from-blog">
                                         <h3>Latest From The Blog
-                                            <a class="button2" href="blog.html">All Posts</a></h3>
+                                            <a class="button2" href="{% url 'blog:blog_list' %}">All Posts</a></h3>
                                         <div class="blog-bar">
                                             <h2><a href="{{ latest.get_absolute_url }}">{{ latest.title }}</a></h2>
                                         </div>

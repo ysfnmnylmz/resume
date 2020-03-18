@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block App %}
+    <body class="classic">
+    <div id="page" class="hfeed site">
+        <main id="main" class="site-main">
+            <header id="masthead" class="header cover" role="banner">
+                <div class="cover-image-holder">
+                    <img src="{{ contact.picture.url }}" alt="cover-image">
+                </div>
+                <div class="header-wrap layout-full">
+                    <h1 class="site-title">{{ contact.name }}</h1>
+                    <h2>{{ contact.description }}</h2>
+                    <div class="header-bottom">
+                        <p>
+                            {% for social in contact.social_media.all %}
+                                <a class="social-link {{ social.title|lower }}" href="{{ social.link }}"></a>
+                            {% endfor %}
+                        </p>
+                    </div>
+                    <nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+                        <div class="nav-menu ">
+                            <ul>
+                                <li><a href="/">Home</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </header>
+            <!-- HEADER -->
+            <!-- site-middle -->
+            <div class="site-middle">
+                <div class="layout-medium">
+                    <div id="primary" class="content-area with-sidebar">
+                        <!-- site-content -->
+                        <div id="content" class="site-content" role="main">
+                            <!-- blog-regular -->
+                            <div class="blog-regular page-layout">
+                                <!-- .entry-header -->
+                                <header class="entry-header">
+                                    <h1 class="entry-title">the blog.</h1>
+                                </header>
+                                <!-- .entry-header -->
+                                {% for post in posts %}
+                                    <article class="hentry post sticky">
+                                        <header class="entry-header">
+                                            <h2 class="entry-title"><a
+                                                    href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+                                            <div class="entry-meta">
+                                                <span class="entry-date">
+                                                    <time class="entry-date"
+                                                          datetime="{{ latest.created_at|date:'c' }}">{{ latest.created_at|date:'F d, Y' }}</time>
+                                                </span>
+                                                {% for i in  post.category.all %}
+                                                    <span class="cat-links">
+                                                    <a href="#" title="View all posts in {{ i.title }}"
+                                                       rel="category tag">{{ i.title }}</a>
+                                                </span>
+                                                {% endfor %}
+                                            </div>
+                                        </header>
+                                        <div class="featured-image">
+                                            <a href="{{ post.get_absolute_url }}">
+                                                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+                                            </a>
+                                        </div>
+                                        <div class="entry-content">
+                                            <p>{{ post.summary }}</p>
+                                            <p class="more"><a href="{{ post.get_absolute_url }}" class="more-link">Read
+                                                More</a>
+                                            </p>
+                                        </div>
+                                    </article>
+                                {% endfor %}
+                                <!-- post pagination -->
+                                <nav class="post-pagination">
+                                    <ul class="pagination">
+                                        <li class="pagination-first"><a href="#"> First </a></li>
+                                        <li class="pagination-prev"><a href="#" rel="prev"> « </a></li>
+                                        <li class="pagination-num"><a href="#"> 1 </a></li>
+                                        <li class="pagination-num current"><a href="#"> 2 </a></li>
+                                        <li class="pagination-num"><a href="#"> 3 </a></li>
+                                        <li class="pagination-next"><a href="#" rel="next"> » </a></li>
+                                        <li class="pagination-last"><a href="#"> Last </a></li>
+                                    </ul>
+                                </nav>
+                                <!-- post pagination -->
+                            </div>
+                            <!-- blog-regular -->
+                        </div>
+                        <!-- site-content -->
+                    </div>
+                    <!-- primary -->
+                    <!-- #secondary -->
+                    <div id="secondary" class="widget-area sidebar" role="complementary">
+                        <!-- widget : categories -->
+                        <aside class="widget widget_categories">
+                            <h3 class="widget-title">Categories</h3>
+                            <ul>
+                                {% for category in blog_categories %}
+                                    <li class="cat-item"><a href="#"
+                                                            title="View all posts filed under {{ category.title }}">{{ category.title }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </aside>
+                        <!-- widget : categories -->
+                        <!-- widget : popular-posts -->
+                        <!-- styles for plugin : https://wordpress.org/plugins/top-10 -->
+                        <aside class="widget widget_widget_tptn_pop">
+                            <h3 class="widget-title">Trending Posts</h3>
+                            <div class="tptn_posts tptn_posts_widget">
+                                <ul>
+                                    {% for trend in trends %}
+                                        <li>
+                                            <a href="#" class="tptn_link">
+                                                <img src="{{ trend.featured_image.url }}" alt="{{trend.title}}" class="tptn_thumb">
+                                            </a>
+                                            <span class="tptn_after_thumb">
+                                                <a href="{{ trend.get_absolute_url }}" class="tptn_link"><span class="tptn_title">{{ trend.title }}</span></a>
+                                                <!--<span class="tptn_author"> by <a href="#">Johnny Doe</a></span>-->
+                                                <span class="tptn_date">{{ trend.created_at|date:'F d, Y' }}</span>
+                                            </span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </aside>
+                        <!-- widget : popular-posts -->
+                        <!-- widget : text -->
+                        <aside class="widget widget_text">
+                            <!--<h3 class="widget-title">Advertisement</h3>-->
+                            <div class="textwidget">
+                                <a href="#"><img src="images/blog/banner.jpg" alt="banner"></a>
+                            </div>
+                        </aside>
+                        <!-- widget : text -->
+                        <!-- widget : recent-posts -->
+                        <aside class="widget widget_recent_entries">
+                            <h3 class="widget-title">Recent Posts</h3>
+                            <ul>
+                                <li><a href="#">Summer Vibes Flowing</a></li>
+                                <li><a href="#">Autmn 2015 Lookbook</a></li>
+                                <li><a href="#">Good Vibes</a></li>
+                                <li><a href="#">Self Employed Lifestyle</a></li>
+                            </ul>
+                        </aside>
+                        <!-- widget : recent-posts -->
+                        <!-- widget : text -->
+                        <aside class="widget widget_text">
+                            <h3 class="widget-title">Facebook</h3>
+                            <!-- below code generated by : https://developers.facebook.com/docs/plugins/page-plugin -->
+                            <div id="fb-root"></div>
+                            <script>(function (d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id)) return;
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = "http://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));</script>
+                            <div class="fb-page" data-href="https://www.facebook.com/vsco" data-small-header="false"
+                                 data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"
+                                 data-show-posts="false">
+                                <div class="fb-xfbml-parse-ignore">
+                                    <blockquote cite="https://www.facebook.com/vsco"><a
+                                            href="https://www.facebook.com/vsco">VSCO</a></blockquote>
+                                </div>
+                            </div>
+                        </aside>
+                        <!-- widget : text -->
+                    </div>
+                    <!-- #secondary -->
+                    <!-- .site-footer -->
+                    <footer id="colophon" class="site-footer" role="contentinfo">
+                        <div class="site-info">
+                            <div class="textwidget">
+                                <a href="https://wordpress.org/">Copyright &copy; 2016 by Pixelwars</a>
+                            </div>
+                        </div>
+                        <!-- .site-info -->
+                    </footer>
+                    <!-- .site-footer -->
+                </div>
+                <!-- layout -->
+            </div>
+            <!-- site-middle -->
+        </main>
+        <!-- .site-main -->
+    </div>
+    <!-- PAGE -->
+    </body>
+{% endblock %}
