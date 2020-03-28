@@ -18,13 +18,15 @@ from django.urls import path
 from django.conf.urls import url, include
 from django.conf import settings
 from django.conf.urls.static import static
+from resume.apps.home.views import GeneratePDF
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url('', include('resume.apps.home.urls', namespace='home')),
     url('portfolio/', include('resume.apps.portfolio.urls', namespace='portfolio')),
     url('blog/', include('resume.apps.blog.urls', namespace='blog')),
-    url('contact/', include('resume.apps.contact.urls', namespace='contact'))
+    url('contact/', include('resume.apps.contact.urls', namespace='contact')),
+    url('pdf/', GeneratePDF.as_view()),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

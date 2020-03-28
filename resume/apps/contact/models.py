@@ -16,6 +16,7 @@ class Mails(models.Model):
 class Social(models.Model):
     title = models.CharField(max_length=255, verbose_name='Social Media Name')
     link = models.URLField(verbose_name='Social Media Profile Link')
+    icon = models.ImageField(verbose_name='Social Media Icon', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Social Media Account'

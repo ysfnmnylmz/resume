@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 200;
+            font-size: 14px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .twitter {
+            color: #1DA1F2;
+        }
+
+        .facebook {
+            color: #4267B2;
+        }
+
+        .instagram {
+            color: #405DE6;
+        }
+
+        .linkedin {
+            color: #2867B2;
+        }
+
+        .row {
+            text-align: center;
+        }
+        .row img{
+            width: 150px;
+            height: 225px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="row">
+    <img src="{{ contact.picture.url }}" alt="">
+</div>
+<div class="row">
+    <p>{{ contact.name }}</p>
+</div>
+</body>
+</html>
